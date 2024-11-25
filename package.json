@@ -1,0 +1,51 @@
+{
+  "name": "ocr-web-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "server": "node server/index.js",
+    "dev:server": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "@types/tesseract.js": "^2.0.0",
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-rate-limit": "^7.2.0",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.344.0",
+    "mongoose": "^8.2.1",
+    "multer": "^1.4.5-lts.1",
+    "ocr-web-app": "file:",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.3",
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.22.3",
+    "tesseract.js": "^5.0.5",
+    "winston": "^3.12.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.2"
+  }
+}
