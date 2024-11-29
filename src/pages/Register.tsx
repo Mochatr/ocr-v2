@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useAuthStore } from '../stores/authStore';
+import { useOCRStore } from '../stores/ocrStore';
 import { UserPlus } from 'lucide-react';
 
 export default function Register() {
@@ -10,12 +11,14 @@ export default function Register() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
+  const clearResult = useOCRStore((state) => state.clearResult);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       // TODO: Replace with actual API call
       const mockToken = 'mock-jwt-token';
+      clearResult(); // Clear any existing OCR results
       login(mockToken);
       toast.success('Successfully registered!');
       navigate('/dashboard');
