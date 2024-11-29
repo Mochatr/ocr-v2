@@ -1,18 +1,18 @@
 import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import helmet from 'helmet';
-import compression from 'compression';
-import rateLimit from 'express-rate-limit';
-import { connectDB } from './config/database.js';
-import { logger } from './utils/logger.js';
-import authRoutes from './routes/auth.routes.js';
-import ocrRoutes from './routes/ocr.routes.js';
+import cors from 'cors'; // Cross-Origin Resource Sharing
+import dotenv from 'dotenv'; // Environment variables
+import helmet from 'helmet'; // Security middleware
+import compression from 'compression'; // Compress responses
+import rateLimit from 'express-rate-limit';  // Rate limiting
+import { connectDB } from './config/database.js'; // Database connection
+import { logger } from './utils/logger.js'; // Logger
+import authRoutes from './routes/auth.routes.js'; 
+import ocrRoutes from './routes/ocr.routes.js'; 
 import errorHandler from './middleware/errorHandler.js';
 
-dotenv.config();
+dotenv.config(); // Load environment variables
 
-const app = express();
+const app = express();  // Create Express app
 
 // Security middleware
 app.use(helmet());

@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { createWorker } from 'tesseract.js';
 import { useOCRStore } from '../stores/ocrStore';
-import { processImage as processImageAPI } from '../services/api';
 import DropZone from '../components/DropZone';
 import ProcessingStatus from '../components/ProcessingStatus';
 import ResultDisplay from '../components/ResultDisplay';
@@ -32,30 +31,19 @@ export default function Dashboard() {
     setIsProcessing(true);
     setProgress(0);
     setResult('');
-    setCurrentStatus('Processing image...');
+    setCurrentStatus('Initializing OCR engine...');
 
     try {
-      // First try to process via backend API
-      try {
-        const { data } = await processImageAPI(file);
-        setResult(data.text);
-        toast.success('Text extracted successfully!');
-        return;
-      } catch (error) {
-        console.warn('Backend processing failed, falling back to client-side OCR');
-      }
-
-      // Fallback to client-side processing
-      const worker = await createWorker();
-
-      worker.logger = (m) => {
-        if (m.progress) {
-          setProgress(Math.round(m.progress * 100));
+      const worker = await createWorker({
+        logger: m => {
+          if ('progress' in m) {
+            setProgress(Math.round(m.progress * 100));
+          }
+          if ('status' in m) {
+            setCurrentStatus(m.status);
+          }
         }
-        if (m.status) {
-          setCurrentStatus(m.status);
-        }
-      };
+      });
 
       await worker.loadLanguage('eng');
       await worker.initialize('eng');
@@ -90,7 +78,7 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-background-white rounded-lg shadow-sm p-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Document Processing</h1>
         
         <DropZone onDrop={onDrop} isProcessing={isProcessing} />
