@@ -13,13 +13,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-background-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <ScanText className="h-8 w-8 text-indigo-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">OCR Pro</span>
+              <ScanText className="h-8 w-8 text-primary" />
+              <span className="ml-2 text-xl font-semibold text-gray-900">OCR Pro</span>
             </Link>
           </div>
           <div className="flex items-center">
@@ -27,13 +27,13 @@ export default function Navbar() {
               <>
                 <Link
                   to="/dashboard"
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="ml-4 text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="ml-4 text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Logout
                 </button>
@@ -42,13 +42,13 @@ export default function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="ml-4 bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium"
+                  className="ml-4 bg-primary hover:bg-primary-light text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Sign Up
                 </Link>
