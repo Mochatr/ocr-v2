@@ -20,9 +20,8 @@ export default {
           dark: '#0056B3',
         },
         background: {
-          main: '#F8F9FA',
-          secondary: '#F1F3F5',
-          white: '#FFFFFF',
+          main: '#FFFFFF',
+          secondary: '#F5F5F7',
         },
       },
     },
