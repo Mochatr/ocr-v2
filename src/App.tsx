@@ -7,11 +7,14 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
+  const { theme } = useTheme();
+
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background-main dark:bg-dark-bg-primary">
         <Navbar />
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -26,7 +29,16 @@ function App() {
             }
           />
         </Routes>
-        <Toaster position="top-right" />
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: theme === 'dark' ? '#2D2D2D' : '#FFFFFF',
+              color: theme === 'dark' ? '#FFFFFF' : '#1F2937',
+              borderColor: theme === 'dark' ? '#374151' : '#E5E7EB',
+            },
+          }}
+        />
       </div>
     </BrowserRouter>
   );
