@@ -3,11 +3,35 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: #007AFF;
+    --color-primary-light: #47A9FF;
+    --color-primary-dark: #0056B3;
+  }
+
   html {
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
   
   body {
-    @apply bg-background-main text-gray-900;
+    @apply bg-background-main dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary transition-colors;
   }
+
+  /* Smooth transition for theme changes */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Dark mode form styles */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark textarea {
+  @apply bg-dark-bg-secondary border-gray-700 text-white placeholder-gray-400;
+}
+
+/* Dark mode button styles */
+.dark button {
+  @apply border-gray-700;
 }
