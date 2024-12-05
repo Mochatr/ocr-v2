@@ -1,37 +1,43 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { OCRService } from '../services/ocrService';
-import { validateImageFile } from '../utils/fileValidation';
-import { useOCRStore } from '../stores/ocrStore';
+import { OCRService } from '../services/ocr/service';
+import { validateImageFile } from '../utils/file';
 
-export const useOCRProcessing = () => {
+export function useOCR() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState('');
-  const { setResult } = useOCRStore();
+  const [result, setResult] = useState('');
+
+  useEffect(() => {
+    return () => {
+      OCRService.cleanup();
+    };
+  }, []);
 
   const processImage = useCallback(async (file: File) => {
     const validation = validateImageFile(file);
     if (!validation.isValid) {
-      toast.error(validation.error);
+      toast.error(validation.error || 'Invalid file');
       return;
     }
 
     setIsProcessing(true);
     setProgress(0);
+    setStatus('Initializing OCR...');
     setResult('');
-    setStatus('Initializing OCR engine...');
 
     try {
-      const text = await OCRService.processImage(file, {
-        onProgress: setProgress,
-        onStatus: setStatus
-      });
-      
+      const { text } = await OCRService.processImage(file);
+
+      if (!text.trim()) {
+        throw new Error('No text detected in the image');
+      }
+
       setResult(text);
       toast.success('Text extracted successfully!');
     } catch (error) {
-      console.error('OCR Processing Error:', error);
+      console.error('OCR Error:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to process image');
       setResult('');
     } finally {
@@ -39,12 +45,13 @@ export const useOCRProcessing = () => {
       setProgress(0);
       setStatus('');
     }
-  }, [setResult]);
+  }, []);
 
   return {
     isProcessing,
     progress,
     status,
-    processImage
+    result,
+    processImage,
   };
 }

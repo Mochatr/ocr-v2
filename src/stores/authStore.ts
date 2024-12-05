@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { useOCRStore } from './ocrStore';
 
 interface AuthState {
   token: string | null;
@@ -15,10 +14,7 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       isAuthenticated: false,
       login: (token) => set({ token, isAuthenticated: true }),
-      logout: () => {
-        set({ token: null, isAuthenticated: false });
-        useOCRStore.getState().clearResult();
-      },
+      logout: () => set({ token: null, isAuthenticated: false }),
     }),
     {
       name: 'auth-storage',
