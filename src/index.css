@@ -14,24 +14,84 @@
   }
   
   body {
-    @apply bg-background-main dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary transition-colors;
+    @apply bg-background-main dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary;
   }
 
   /* Smooth transition for theme changes */
   * {
-    @apply transition-colors duration-200;
+    @apply transition-all duration-200;
   }
 }
 
-/* Dark mode form styles */
-.dark input[type="text"],
-.dark input[type="email"],
-.dark input[type="password"],
-.dark textarea {
-  @apply bg-dark-bg-secondary border-gray-700 text-white placeholder-gray-400;
+/* Typography styles */
+.heading-1 {
+  @apply text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl md:text-6xl;
 }
 
-/* Dark mode button styles */
-.dark button {
-  @apply border-gray-700;
+.heading-2 {
+  @apply text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl;
+}
+
+.heading-3 {
+  @apply text-2xl font-semibold text-gray-900 dark:text-white;
+}
+
+.body-large {
+  @apply text-lg text-gray-700 dark:text-gray-300;
+}
+
+.body-base {
+  @apply text-base text-gray-600 dark:text-gray-400;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-primary hover:bg-primary-light dark:bg-primary-dark dark:hover:bg-primary
+         text-white font-medium rounded-md shadow-elevation-2 dark:shadow-elevation-dark-2
+         hover:shadow-elevation-3 dark:hover:shadow-elevation-dark-3
+         transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-dark-bg-elevated dark:hover:bg-dark-bg-highlight
+         text-gray-900 dark:text-white font-medium rounded-md shadow-elevation-1 dark:shadow-elevation-dark-1
+         hover:shadow-elevation-2 dark:hover:shadow-elevation-dark-2
+         transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white dark:bg-dark-bg-elevated rounded-lg shadow-elevation-2 dark:shadow-elevation-dark-2
+         hover:shadow-elevation-3 dark:hover:shadow-elevation-dark-3 transition-all duration-300;
+}
+
+/* Form styles */
+.input-field {
+  @apply w-full px-4 py-2 bg-white dark:bg-dark-bg-elevated border border-gray-300 dark:border-gray-600
+         rounded-md text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
+         focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-600 focus:border-transparent
+         transition-all duration-200;
+}
+
+/* Section backgrounds */
+.bg-gradient-primary {
+  @apply bg-gradient-to-b from-background-main to-background-secondary
+         dark:from-dark-bg-primary dark:to-dark-bg-secondary;
+}
+
+.bg-gradient-secondary {
+  @apply bg-gradient-to-b from-background-secondary to-background-tertiary
+         dark:from-dark-bg-secondary dark:to-dark-bg-elevated;
+}
+
+/* Interactive elements */
+.interactive-hover {
+  @apply transform hover:scale-105 hover:shadow-elevation-3 dark:hover:shadow-elevation-dark-3
+         transition-all duration-200;
+}
+
+/* Icon containers */
+.icon-container {
+  @apply flex items-center justify-center h-12 w-12 rounded-full
+         bg-primary-50 dark:bg-primary-900 text-primary-600 dark:text-primary-300;
 }
