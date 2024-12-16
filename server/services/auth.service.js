@@ -68,10 +68,10 @@ export class AuthService {
         throw new ApiError('Account is temporarily locked. Please try again later', 423);
       }
 
-      // Verify password
+      // Verify password using the instance method
       const isPasswordValid = await user.comparePassword(password);
       if (!isPasswordValid) {
-        await this.handleFailedLogin(user);
+        await user.handleFailedLogin();
         throw new ApiError('Invalid credentials', 401);
       }
 
@@ -106,20 +106,6 @@ export class AuthService {
       logger.error('Login error:', error);
       throw error;
     }
-  }
-
-  static async handleFailedLogin(user) {
-    await user.handleFailedLogin();
-    
-    await AuditService.logActivity({
-      userId: user._id,
-      action: 'user_login',
-      status: 'failure',
-      details: {
-        reason: 'invalid_password',
-        attempts: user.loginAttempts + 1
-      }
-    });
   }
 
   static generateToken(userId) {
